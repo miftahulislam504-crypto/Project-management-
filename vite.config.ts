@@ -9,4 +9,14 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Silence deprecation warnings from third-party packages (frappe-gantt)
+        quietDeps: true,
+        // Use legacy API to avoid sass-embedded requirement
+        api: 'legacy' as const,
+      },
+    },
+  },
 })
