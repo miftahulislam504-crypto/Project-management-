@@ -213,8 +213,9 @@ export function generateCostReport(
   pdf.setFontSize(7)
   pdf.setFont('helvetica', 'bold')
   pdf.setTextColor(100, 116, 139)
-  const cCols = [14, 34, 84, 114, 154, 182]
-  ['Date', 'Description', 'Category', 'Vendor', 'Amount'].forEach((h, i) =>
+  const cCols: number[] = [14, 34, 84, 114, 154, 182]
+  const cHeaders: string[] = ['Date', 'Description', 'Category', 'Vendor', 'Amount']
+  cHeaders.forEach((h: string, i: number) =>
     pdf.text(h, cCols[i], y + 4.5)
   )
   y += 8

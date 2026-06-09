@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import type * as PlotlyType from 'plotly.js'
 import { SCurvePoint } from '@/lib/cost-helpers'
 
 interface Props {
@@ -12,7 +13,8 @@ export default function SCurveChart({ data }: Props) {
     if (!ref.current || data.length === 0) return
 
     // Dynamic import Plotly to avoid SSR issues
-    import('plotly.js-dist').then(Plotly => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    import('plotly.js-dist').then((Plotly: any) => {
       const weeks    = data.map(d => d.week)
       const planned  = data.map(d => d.planned)
       const actual   = data.map(d => d.actual > 0 ? d.actual : null)
@@ -120,7 +122,8 @@ export default function SCurveChart({ data }: Props) {
 
     return () => {
       if (ref.current) {
-        import('plotly.js-dist').then(Plotly => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        import('plotly.js-dist').then((Plotly: any) => {
           Plotly.default.purge(ref.current!)
         })
       }

@@ -8,7 +8,7 @@ import {
   HardHat, Menu, Network, CalendarDays,
   KanbanSquare, TrendingUp, BookOpen,
   DollarSign, AlertTriangle, ClipboardCheck,
-  BarChart3, FileText
+  BarChart3, FileText, PackageCheck, Zap
 } from 'lucide-react'
 import { useState } from 'react'
 import { clsx } from 'clsx'
@@ -19,7 +19,7 @@ const topNav = [
 ]
 
 // Project-level nav (shown when inside a project)
-const projectNav = [
+const projectNav: { path: string; icon: React.ElementType; label: string; sprint: number; soon?: boolean }[] = [
   { path: '',           icon: LayoutDashboard, label: 'Dashboard',  sprint: 1 },
   { path: 'wbs',        icon: Network,         label: 'WBS',        sprint: 2 },
   { path: 'schedule',   icon: CalendarDays,    label: 'Schedule',   sprint: 3 },
