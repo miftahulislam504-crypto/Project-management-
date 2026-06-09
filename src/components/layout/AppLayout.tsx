@@ -28,10 +28,14 @@ const projectNav = [
   { path: 'kanban',     icon: KanbanSquare,    label: 'Kanban',     sprint: 6 },
   { path: 'progress',   icon: TrendingUp,      label: 'Progress',   sprint: 7 },
   { path: 'diary',      icon: BookOpen,        label: 'Site Diary', sprint: 8 },
-  { path: 'cost',       icon: DollarSign,      label: 'Cost',       sprint: 9,  soon: true },
-  { path: 'issues',     icon: AlertTriangle,   label: 'Issues',     sprint: 12, soon: true },
-  { path: 'quality',    icon: ClipboardCheck,  label: 'QA/QC',      sprint: 13, soon: true },
-  { path: 'reports',    icon: FileText,        label: 'Reports',    sprint: 17, soon: true },
+  { path: 'cost',       icon: DollarSign,      label: 'Cost',       sprint: 9 },
+  { path: 'issues',     icon: AlertTriangle,   label: 'Issues',     sprint: 12 },
+  { path: 'quality',    icon: ClipboardCheck,  label: 'QA/QC',      sprint: 13 },
+  { path: 'approvals',  icon: ClipboardCheck,  label: 'Approvals',  sprint: 14 },
+  { path: 'analytics',  icon: BarChart3,       label: 'Analytics',  sprint: 16 },
+  { path: 'closeout',   icon: PackageCheck,    label: 'Closeout',   sprint: 18 },
+  { path: 'reports',    icon: FileText,        label: 'Reports',    sprint: 17 },
+  { path: 'ecosystem',  icon: Zap,             label: 'Ecosystem',  sprint: 19 },
 ]
 
 export default function AppLayout() {

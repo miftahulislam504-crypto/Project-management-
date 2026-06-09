@@ -14,6 +14,14 @@ import ProcurementPage  from '@/pages/ProcurementPage'
 import KanbanPage       from '@/pages/KanbanPage'
 import ProgressPage     from '@/pages/ProgressPage'
 import DiaryPage        from '@/pages/DiaryPage'
+import CostPage         from '@/pages/CostPage'
+import IssuePage        from '@/pages/IssuePage'
+import QCPage           from '@/pages/QCPage'
+import ApprovalPage     from '@/pages/ApprovalPage'
+import AnalyticsPage    from '@/pages/AnalyticsPage'
+import ReportPage       from '@/pages/ReportPage'
+import CloseoutPage     from '@/pages/CloseoutPage'
+import EcosystemPage    from '@/pages/EcosystemPage'
 import AppLayout        from '@/components/layout/AppLayout'
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
@@ -71,6 +79,14 @@ export default function App() {
           <Route path="projects/:id/kanban"         element={<KanbanPage />} />
           <Route path="projects/:id/progress"       element={<ProgressPage />} />
           <Route path="projects/:id/diary"          element={<DiaryPage />} />
+          <Route path="projects/:id/cost"           element={<CostPage />} />
+          <Route path="projects/:id/issues"         element={<IssuePage />} />
+          <Route path="projects/:id/quality"        element={<QCPage />} />
+          <Route path="projects/:id/approvals"      element={<ApprovalPage />} />
+          <Route path="projects/:id/analytics"      element={<AnalyticsPage />} />
+          <Route path="projects/:id/reports"        element={<ReportPage />} />
+          <Route path="projects/:id/closeout"       element={<CloseoutPage />} />
+          <Route path="projects/:id/ecosystem"      element={<EcosystemPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
