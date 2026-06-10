@@ -5,10 +5,10 @@ import { useAuthStore } from '@/store/useAuthStore'
 import { useProjectStore } from '@/store/useProjectStore'
 import {
   LayoutDashboard, FolderOpen, LogOut,
-  HardHat, Menu, Network, CalendarDays,
+  HardHat, Network, CalendarDays,
   KanbanSquare, TrendingUp, BookOpen,
   DollarSign, AlertTriangle, ClipboardCheck,
-  BarChart3, FileText, PackageCheck, Zap
+  BarChart3, FileText, PackageCheck, Zap, X
 } from 'lucide-react'
 import { useState } from 'react'
 import { clsx } from 'clsx'
@@ -20,22 +20,22 @@ const topNav = [
 
 // Project-level nav (shown when inside a project)
 const projectNav: { path: string; icon: React.ElementType; label: string; sprint: number; soon?: boolean }[] = [
-  { path: '',           icon: LayoutDashboard, label: 'Dashboard',  sprint: 1 },
-  { path: 'wbs',        icon: Network,         label: 'WBS',        sprint: 2 },
-  { path: 'schedule',   icon: CalendarDays,    label: 'Schedule',   sprint: 3 },
-  { path: 'resources',  icon: BarChart3,       label: 'Resources',  sprint: 4 },
-  { path: 'procurement',icon: DollarSign,      label: 'Procurement',sprint: 5 },
-  { path: 'kanban',     icon: KanbanSquare,    label: 'Kanban',     sprint: 6 },
-  { path: 'progress',   icon: TrendingUp,      label: 'Progress',   sprint: 7 },
-  { path: 'diary',      icon: BookOpen,        label: 'Site Diary', sprint: 8 },
-  { path: 'cost',       icon: DollarSign,      label: 'Cost',       sprint: 9 },
-  { path: 'issues',     icon: AlertTriangle,   label: 'Issues',     sprint: 12 },
-  { path: 'quality',    icon: ClipboardCheck,  label: 'QA/QC',      sprint: 13 },
-  { path: 'approvals',  icon: ClipboardCheck,  label: 'Approvals',  sprint: 14 },
-  { path: 'analytics',  icon: BarChart3,       label: 'Analytics',  sprint: 16 },
-  { path: 'closeout',   icon: PackageCheck,    label: 'Closeout',   sprint: 18 },
-  { path: 'reports',    icon: FileText,        label: 'Reports',    sprint: 17 },
-  { path: 'ecosystem',  icon: Zap,             label: 'Ecosystem',  sprint: 19 },
+  { path: '',            icon: LayoutDashboard, label: 'Dashboard',   sprint: 1  },
+  { path: 'wbs',         icon: Network,         label: 'WBS',         sprint: 2  },
+  { path: 'schedule',    icon: CalendarDays,    label: 'Schedule',    sprint: 3  },
+  { path: 'resources',   icon: BarChart3,       label: 'Resources',   sprint: 4  },
+  { path: 'procurement', icon: DollarSign,      label: 'Procurement', sprint: 5  },
+  { path: 'kanban',      icon: KanbanSquare,    label: 'Kanban',      sprint: 6  },
+  { path: 'progress',    icon: TrendingUp,      label: 'Progress',    sprint: 7  },
+  { path: 'diary',       icon: BookOpen,        label: 'Site Diary',  sprint: 8  },
+  { path: 'cost',        icon: DollarSign,      label: 'Cost',        sprint: 9  },
+  { path: 'issues',      icon: AlertTriangle,   label: 'Issues',      sprint: 12 },
+  { path: 'quality',     icon: ClipboardCheck,  label: 'QA/QC',       sprint: 13 },
+  { path: 'approvals',   icon: ClipboardCheck,  label: 'Approvals',   sprint: 14 },
+  { path: 'analytics',   icon: BarChart3,       label: 'Analytics',   sprint: 16 },
+  { path: 'reports',     icon: FileText,        label: 'Reports',     sprint: 17 },
+  { path: 'closeout',    icon: PackageCheck,    label: 'Closeout',    sprint: 18 },
+  { path: 'ecosystem',   icon: Zap,             label: 'Ecosystem',   sprint: 19 },
 ]
 
 export default function AppLayout() {
@@ -54,24 +54,41 @@ export default function AppLayout() {
   }
 
   return (
-    <div className="flex h-screen bg-civil-bg overflow-hidden">
+    <div className="flex h-dvh bg-civil-bg overflow-hidden">
+
+      {/* Mobile overlay */}
+      {open && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60 lg:hidden"
+          onClick={() => setOpen(false)}
+        />
+      )}
 
       {/* Sidebar */}
       <aside className={clsx(
         'fixed inset-y-0 left-0 z-50 w-56 bg-civil-surface border-r border-civil-border',
         'flex flex-col transition-transform duration-300',
         open ? 'translate-x-0' : '-translate-x-full',
-        'lg:relative lg:translate-x-0'
+        'lg:relative lg:translate-x-0 lg:flex-shrink-0'
       )}>
         {/* Logo */}
-        <div className="flex items-center gap-2 px-4 py-4 border-b border-civil-border">
-          <div className="w-7 h-7 rounded-lg bg-civil-accent/10 flex items-center justify-center">
-            <HardHat className="w-4 h-4 text-civil-accent" />
+        <div className="flex items-center justify-between px-4 py-4 border-b border-civil-border">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-lg bg-civil-accent/10 flex items-center justify-center">
+              <HardHat className="w-4 h-4 text-civil-accent" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-civil-text">CivilOS</p>
+              <p className="text-[10px] text-civil-muted leading-none">Project Management</p>
+            </div>
           </div>
-          <div>
-            <p className="text-xs font-bold text-civil-text">CivilOS</p>
-            <p className="text-[10px] text-civil-muted leading-none">Project Management</p>
-          </div>
+          {/* Close button - mobile only */}
+          <button
+            className="lg:hidden text-civil-muted hover:text-civil-text"
+            onClick={() => setOpen(false)}
+          >
+            <X className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Nav */}
@@ -161,18 +178,10 @@ export default function AppLayout() {
         </div>
       </aside>
 
-      {/* Mobile overlay */}
-      {open && (
-        <div
-          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
-          onClick={() => setOpen(false)}
-        />
-      )}
-
       {/* Main */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 min-h-0 overflow-hidden">
         {/* Mobile top bar */}
-        <header className="flex items-center gap-3 px-4 py-3 border-b border-civil-border bg-civil-surface lg:hidden">
+        <header className="flex items-center gap-3 px-4 py-3 border-b border-civil-border bg-civil-surface lg:hidden flex-shrink-0">
           <button onClick={() => setOpen(true)} className="text-civil-muted hover:text-civil-text">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -185,7 +194,7 @@ export default function AppLayout() {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto min-h-0">
           <Outlet />
         </main>
       </div>
