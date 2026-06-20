@@ -39,34 +39,37 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-civil-bg flex items-center justify-center px-4">
-      {/* Background grid */}
-      <div className="absolute inset-0 opacity-[0.03]"
+
+      {/* Subtle dot grid background */}
+      <div
+        className="absolute inset-0 opacity-[0.4]"
         style={{
-          backgroundImage: 'linear-gradient(#38bdf8 1px, transparent 1px), linear-gradient(90deg, #38bdf8 1px, transparent 1px)',
-          backgroundSize: '40px 40px'
+          backgroundImage: 'radial-gradient(circle, #e5e7eb 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
         }}
       />
 
       <div className="relative w-full max-w-sm">
+
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-civil-accent/10 border border-civil-accent/20 mb-4">
-            <HardHat className="w-7 h-7 text-civil-accent" />
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-civil-accent shadow-md mb-4">
+            <HardHat className="w-7 h-7 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-civil-text">CivilOS</h1>
+          <h1 className="text-2xl font-bold text-civil-text tracking-tight">CivilOS</h1>
           <p className="text-sm text-civil-muted mt-1">Construction Project Management</p>
         </div>
 
         {/* Card */}
-        <div className="card">
-          <h2 className="text-base font-semibold text-civil-text mb-6">
+        <div className="bg-white border border-civil-border rounded-2xl p-6 shadow-card">
+          <h2 className="text-base font-semibold text-civil-text mb-5">
             {mode === 'login' ? 'Sign in to your account' : 'Create new account'}
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {mode === 'register' && (
               <div>
-                <label className="text-xs text-civil-muted mb-1 block">Full Name</label>
+                <label className="text-xs font-medium text-civil-muted mb-1.5 block">Full Name</label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-civil-muted" />
                   <input
@@ -82,7 +85,7 @@ export default function LoginPage() {
             )}
 
             <div>
-              <label className="text-xs text-civil-muted mb-1 block">Email</label>
+              <label className="text-xs font-medium text-civil-muted mb-1.5 block">Email</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-civil-muted" />
                 <input
@@ -97,7 +100,7 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label className="text-xs text-civil-muted mb-1 block">Password</label>
+              <label className="text-xs font-medium text-civil-muted mb-1.5 block">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-civil-muted" />
                 <input
@@ -119,18 +122,20 @@ export default function LoginPage() {
             </div>
 
             {error && (
-              <p className="text-red-400 text-xs bg-red-900/20 border border-red-900/30 rounded-lg px-3 py-2">
+              <p className="text-red-600 text-xs bg-red-50 border border-red-200 rounded-lg px-3 py-2">
                 {error}
               </p>
             )}
 
             <button type="submit" disabled={loading} className="btn-primary w-full justify-center flex items-center gap-2 mt-2">
-              {loading && <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
+              {loading && (
+                <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+              )}
               {mode === 'login' ? 'Sign In' : 'Create Account'}
             </button>
           </form>
 
-          <div className="mt-4 text-center">
+          <div className="mt-5 pt-4 border-t border-civil-border text-center">
             <button
               onClick={() => { setMode(m => m === 'login' ? 'register' : 'login'); setError('') }}
               className="text-xs text-civil-muted hover:text-civil-accent transition-colors"
@@ -141,6 +146,10 @@ export default function LoginPage() {
             </button>
           </div>
         </div>
+
+        <p className="text-center text-[10px] text-civil-muted mt-6">
+          CivilOS — Built for Bangladesh Construction Industry
+        </p>
       </div>
     </div>
   )

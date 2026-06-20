@@ -143,10 +143,10 @@ export default function QCPage() {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
         {[
           { label: 'Total',    value: stats.total,  color: 'text-civil-muted',  bg: 'bg-civil-surface' },
-          { label: 'Pass',     value: stats.pass,   color: 'text-green-400',   bg: 'bg-green-900/20' },
-          { label: 'Fail',     value: stats.fail,   color: 'text-red-400',     bg: 'bg-red-900/20' },
-          { label: 'Observation', value: stats.obs, color: 'text-yellow-400',  bg: 'bg-yellow-900/20' },
-          { label: 'Signed Off',  value: stats.signed, color: 'text-blue-400', bg: 'bg-blue-900/20' },
+          { label: 'Pass',     value: stats.pass,   color: 'text-green-600',   bg: 'bg-green-50' },
+          { label: 'Fail',     value: stats.fail,   color: 'text-red-600',     bg: 'bg-red-50' },
+          { label: 'Observation', value: stats.obs, color: 'text-amber-600',  bg: 'bg-amber-50' },
+          { label: 'Signed Off',  value: stats.signed, color: 'text-blue-600', bg: 'bg-blue-50' },
         ].map(({ label, value, color, bg }) => (
           <div key={label} className="card text-center">
             <p className={clsx('text-2xl font-bold', color)}>{value}</p>
@@ -199,9 +199,9 @@ export default function QCPage() {
             return (
               <div key={record.id} className={clsx(
                 'card border transition-colors',
-                overall === 'pass'        && 'border-green-900/40',
-                overall === 'fail'        && 'border-red-900/40',
-                overall === 'observation' && 'border-yellow-900/40',
+                overall === 'pass'        && 'border-green-200',
+                overall === 'fail'        && 'border-red-200',
+                overall === 'observation' && 'border-amber-200',
                 overall === null          && 'border-civil-border',
               )}>
                 <div className="flex items-start justify-between gap-3">
@@ -221,7 +221,7 @@ export default function QCPage() {
                         </span>
                       )}
                       {record.signedOff && (
-                        <span className="text-[10px] bg-blue-900/20 text-blue-400 border border-blue-900/40 px-2 py-0.5 rounded-full">
+                        <span className="text-[10px] bg-blue-50 text-blue-600 border border-blue-200 px-2 py-0.5 rounded-full">
                           ✓ Signed Off
                         </span>
                       )}
@@ -243,11 +243,11 @@ export default function QCPage() {
                   </div>
                   <div className="flex gap-1 flex-shrink-0">
                     <button onClick={() => openModal(record)}
-                      className="p-1.5 text-civil-muted hover:text-civil-accent hover:bg-civil-accent/10 rounded transition-colors">
+                      className="p-1.5 text-civil-muted hover:text-civil-accent hover:bg-civil-accent/8 rounded transition-colors">
                       <PenLine className="w-3.5 h-3.5" />
                     </button>
                     <button onClick={() => deleteQCRecord(record.id)}
-                      className="p-1.5 text-civil-muted hover:text-red-400 hover:bg-red-900/10 rounded transition-colors">
+                      className="p-1.5 text-civil-muted hover:text-red-600 hover:bg-red-50 rounded transition-colors">
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
@@ -260,7 +260,7 @@ export default function QCPage() {
 
       {/* ── QC MODAL ── */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm">
           <div className="bg-civil-card border border-civil-border rounded-2xl w-full max-w-lg flex flex-col max-h-[92vh]">
             <div className="flex items-center justify-between px-5 py-4 border-b border-civil-border flex-shrink-0">
               <div>
@@ -316,9 +316,9 @@ export default function QCPage() {
                   <label className="text-xs font-semibold text-civil-text">Checklist</label>
                   <div className="flex items-center gap-3 text-[10px]">
                     {[
-                      { status: 'pass' as QCStatus, icon: CheckCircle2, color: 'text-green-400' },
-                      { status: 'fail' as QCStatus, icon: XCircle, color: 'text-red-400' },
-                      { status: 'observation' as QCStatus, icon: Eye, color: 'text-yellow-400' },
+                      { status: 'pass' as QCStatus, icon: CheckCircle2, color: 'text-green-600' },
+                      { status: 'fail' as QCStatus, icon: XCircle, color: 'text-red-600' },
+                      { status: 'observation' as QCStatus, icon: Eye, color: 'text-amber-600' },
                     ].map(({ status, icon: Icon, color }) => (
                       <div key={status} className={clsx('flex items-center gap-1', color)}>
                         <Icon className="w-3 h-3" />
@@ -335,7 +335,7 @@ export default function QCPage() {
                         <div className="flex gap-1 flex-shrink-0">
                           {(['pass', 'fail', 'observation'] as QCStatus[]).map(s => {
                             const icons = { pass: CheckCircle2, fail: XCircle, observation: Eye }
-                            const colors = { pass: 'text-green-400 hover:bg-green-900/20', fail: 'text-red-400 hover:bg-red-900/20', observation: 'text-yellow-400 hover:bg-yellow-900/20' }
+                            const colors = { pass: 'text-green-600 hover:bg-green-50', fail: 'text-red-600 hover:bg-red-50', observation: 'text-amber-600 hover:bg-amber-50' }
                             const Icon = icons[s]
                             return (
                               <button key={s} onClick={() => setItemStatus(idx, s)}

@@ -122,7 +122,7 @@ export default function WBSPage() {
               {activities.length > 0 && (
                 <button
                   onClick={() => setShowConfirm(true)}
-                  className="btn-ghost flex items-center gap-1.5 text-red-400 border-red-900/30 hover:bg-red-900/10"
+                  className="btn-ghost flex items-center gap-1.5 text-red-600 border-red-200 hover:bg-red-50"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">Reset</span>
@@ -238,14 +238,14 @@ export default function WBSPage() {
       {/* Mobile overlay */}
       {selected && (
         <div
-          className="fixed inset-0 z-30 bg-black/50 lg:hidden"
+          className="fixed inset-0 z-30 bg-black/20 lg:hidden"
           onClick={() => setSelected(null)}
         />
       )}
 
       {/* Confirm delete modal */}
       {showConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30">
           <div className="bg-civil-card border border-civil-border rounded-2xl p-6 max-w-sm w-full">
             <h3 className="font-semibold text-civil-text mb-2">Reset WBS?</h3>
             <p className="text-sm text-civil-muted mb-5">

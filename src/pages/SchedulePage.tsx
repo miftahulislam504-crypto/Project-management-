@@ -213,9 +213,9 @@ export default function SchedulePage() {
                         <td className="px-3 py-2">
                           <span className={clsx(
                             'px-2 py-0.5 rounded-full text-[10px] capitalize',
-                            a.status === 'completed'   && 'bg-green-900/30 text-green-400',
-                            a.status === 'in-progress' && 'bg-blue-900/30 text-blue-400',
-                            a.status === 'delayed'     && 'bg-red-900/30 text-red-400',
+                            a.status === 'completed'   && 'bg-green-50 text-green-600',
+                            a.status === 'in-progress' && 'bg-blue-50 text-blue-600',
+                            a.status === 'delayed'     && 'bg-red-50 text-red-600',
                             a.status === 'not-started' && 'bg-civil-surface text-civil-muted',
                           )}>
                             {a.status.replace('-', ' ')}
@@ -223,7 +223,7 @@ export default function SchedulePage() {
                         </td>
                         <td className="px-3 py-2">
                           {a.isCritical && (
-                            <span className="text-[10px] bg-red-900/30 text-red-400 border border-red-900/40 px-1.5 py-0.5 rounded">
+                            <span className="text-[10px] bg-red-50 text-red-600 border border-red-200 px-1.5 py-0.5 rounded">
                               Critical
                             </span>
                           )}
@@ -244,7 +244,7 @@ export default function SchedulePage() {
                 className="flex items-center justify-between w-full"
               >
                 <div className="flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-red-400" />
+                  <AlertTriangle className="w-4 h-4 text-red-600" />
                   <span className="text-sm font-semibold text-civil-text">
                     Critical Path ({criticalTasks.length} activities)
                   </span>
@@ -260,18 +260,18 @@ export default function SchedulePage() {
                   {criticalTasks.map(a => (
                     <div
                       key={a.id}
-                      className="flex items-center gap-3 bg-red-900/10 border border-red-900/20 rounded-lg px-3 py-2"
+                      className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-lg px-3 py-2"
                     >
-                      <span className="text-[10px] font-mono text-red-400 w-10">{a.code}</span>
+                      <span className="text-[10px] font-mono text-red-600 w-10">{a.code}</span>
                       <span className="flex-1 text-xs text-civil-text truncate">{a.name}</span>
                       <span className="text-xs text-civil-muted">{a.duration}d</span>
-                      <div className="w-12 h-1.5 bg-red-900/30 rounded-full overflow-hidden">
+                      <div className="w-12 h-1.5 bg-red-50 rounded-full overflow-hidden">
                         <div
                           className="h-full bg-red-400 rounded-full"
                           style={{ width: `${a.progress}%` }}
                         />
                       </div>
-                      <span className="text-xs text-red-400 w-8 text-right">{a.progress}%</span>
+                      <span className="text-xs text-red-600 w-8 text-right">{a.progress}%</span>
                     </div>
                   ))}
                 </div>

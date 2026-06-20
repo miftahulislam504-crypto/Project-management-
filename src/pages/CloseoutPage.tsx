@@ -116,17 +116,17 @@ export default function CloseoutPage() {
       <div className={clsx(
         'card mb-4 flex items-center gap-3 border',
         stats.readyToHandover
-          ? 'border-green-900/40 bg-green-900/10'
-          : 'border-yellow-900/30 bg-yellow-900/10'
+          ? 'border-green-200 bg-green-50'
+          : 'border-amber-200 bg-amber-50'
       )}>
         {stats.readyToHandover
-          ? <CheckCircle2 className="w-6 h-6 text-green-400 flex-shrink-0" />
-          : <AlertTriangle className="w-6 h-6 text-yellow-400 flex-shrink-0" />
+          ? <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0" />
+          : <AlertTriangle className="w-6 h-6 text-amber-600 flex-shrink-0" />
         }
         <div>
           <p className={clsx(
             'text-sm font-semibold',
-            stats.readyToHandover ? 'text-green-400' : 'text-yellow-400'
+            stats.readyToHandover ? 'text-green-600' : 'text-amber-600'
           )}>
             {stats.readyToHandover ? '✓ Ready for Handover' : 'Not Ready for Handover'}
           </p>
@@ -140,14 +140,14 @@ export default function CloseoutPage() {
       <div className="grid grid-cols-3 gap-3 mb-4">
         {[
           { label: 'Punch List',    open: stats.punch.open,       total: stats.punch.total,       resolved: stats.punch.resolved,       icon: ClipboardList, color: 'text-orange-400' },
-          { label: 'Inspections',   open: stats.inspections.fail, total: stats.inspections.total, resolved: stats.inspections.pass,     icon: Award,         color: 'text-blue-400' },
-          { label: 'Handover',      open: 0,                      total: stats.handover.total,    resolved: stats.handover.completed,   icon: PackageCheck,  color: 'text-green-400' },
+          { label: 'Inspections',   open: stats.inspections.fail, total: stats.inspections.total, resolved: stats.inspections.pass,     icon: Award,         color: 'text-blue-600' },
+          { label: 'Handover',      open: 0,                      total: stats.handover.total,    resolved: stats.handover.completed,   icon: PackageCheck,  color: 'text-green-600' },
         ].map(({ label, open, total, resolved, icon: Icon, color }) => (
           <div key={label} className="card text-center">
             <Icon className={clsx('w-5 h-5 mx-auto mb-1', color)} />
             <p className={clsx('text-xl font-bold', color)}>{resolved}/{total}</p>
             <p className="text-xs text-civil-muted">{label}</p>
-            {open > 0 && <p className="text-[10px] text-red-400">{open} pending</p>}
+            {open > 0 && <p className="text-[10px] text-red-600">{open} pending</p>}
           </div>
         ))}
       </div>
@@ -187,7 +187,7 @@ export default function CloseoutPage() {
                           {stat.label}
                         </span>
                         <span className={clsx('text-[10px] px-2 py-0.5 rounded-full capitalize',
-                          item.severity === 'critical' ? 'bg-red-900/30 text-red-400' :
+                          item.severity === 'critical' ? 'bg-red-50 text-red-600' :
                           item.severity === 'major'    ? 'bg-orange-900/30 text-orange-400' :
                           'bg-civil-surface text-civil-muted'
                         )}>
@@ -213,7 +213,7 @@ export default function CloseoutPage() {
                         <option value="resolved">Resolved</option>
                       </select>
                       <button onClick={() => deletePunchItem(item.id)}
-                        className="p-1.5 text-civil-muted hover:text-red-400 hover:bg-red-900/10 rounded transition-colors">
+                        className="p-1.5 text-civil-muted hover:text-red-600 hover:bg-red-50 rounded transition-colors">
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     </div>
@@ -239,9 +239,9 @@ export default function CloseoutPage() {
               const cfg = inspTypeConfig[insp.type]
               return (
                 <div key={insp.id} className={clsx('card border',
-                  insp.status === 'pass'        && 'border-green-900/40',
-                  insp.status === 'fail'        && 'border-red-900/40',
-                  insp.status === 'conditional' && 'border-yellow-900/40',
+                  insp.status === 'pass'        && 'border-green-200',
+                  insp.status === 'fail'        && 'border-red-200',
+                  insp.status === 'conditional' && 'border-amber-200',
                 )}>
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-start gap-3 flex-1 min-w-0">
@@ -250,9 +250,9 @@ export default function CloseoutPage() {
                         <div className="flex items-center gap-2 flex-wrap">
                           <p className="text-sm font-semibold text-civil-text">{insp.title}</p>
                           <span className={clsx('text-[10px] px-2 py-0.5 rounded-full font-semibold capitalize',
-                            insp.status === 'pass'        ? 'bg-green-900/20 text-green-400' :
-                            insp.status === 'fail'        ? 'bg-red-900/20 text-red-400' :
-                            'bg-yellow-900/20 text-yellow-400'
+                            insp.status === 'pass'        ? 'bg-green-50 text-green-600' :
+                            insp.status === 'fail'        ? 'bg-red-50 text-red-600' :
+                            'bg-amber-50 text-amber-600'
                           )}>
                             {insp.status}
                           </span>
@@ -264,7 +264,7 @@ export default function CloseoutPage() {
                       </div>
                     </div>
                     <button onClick={() => deleteInspection(insp.id)}
-                      className="p-1.5 text-civil-muted hover:text-red-400 hover:bg-red-900/10 rounded transition-colors flex-shrink-0">
+                      className="p-1.5 text-civil-muted hover:text-red-600 hover:bg-red-50 rounded transition-colors flex-shrink-0">
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
@@ -304,8 +304,8 @@ export default function CloseoutPage() {
               {items.map(item => (
                 <div key={item.id} className={clsx(
                   'card flex items-center gap-3 border transition-colors',
-                  item.status === 'completed'   && 'border-green-900/30 bg-green-900/5',
-                  item.status === 'in-progress' && 'border-yellow-900/30',
+                  item.status === 'completed'   && 'border-green-200 bg-green-900/5',
+                  item.status === 'in-progress' && 'border-amber-200',
                   item.status === 'not-started' && 'border-civil-border',
                 )}>
                   {/* Status toggle */}
@@ -339,7 +339,7 @@ export default function CloseoutPage() {
                     </p>
                     <p className="text-[10px] text-civil-muted">{item.description}</p>
                     {item.completedDate && (
-                      <p className="text-[10px] text-green-400">✓ {item.completedDate}</p>
+                      <p className="text-[10px] text-green-600">✓ {item.completedDate}</p>
                     )}
                   </div>
                 </div>
@@ -351,7 +351,7 @@ export default function CloseoutPage() {
 
       {/* ── MODAL ── */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm">
           <div className="bg-civil-card border border-civil-border rounded-2xl w-full max-w-md flex flex-col max-h-[90vh]">
             <div className="flex items-center justify-between px-5 py-4 border-b border-civil-border flex-shrink-0">
               <h2 className="font-semibold text-civil-text">
@@ -423,7 +423,7 @@ export default function CloseoutPage() {
                             className={clsx(
                               'py-2 rounded-lg border text-xs font-medium transition-colors text-center',
                               iForm.type === t
-                                ? `bg-civil-accent/10 ${cfg.color} border-current`
+                                ? `bg-civil-accent/8 ${cfg.color} border-current`
                                 : 'bg-civil-surface border-civil-border text-civil-muted'
                             )}>
                             <div>{cfg.emoji}</div>

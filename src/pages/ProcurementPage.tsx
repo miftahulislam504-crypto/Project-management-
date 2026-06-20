@@ -105,11 +105,11 @@ export default function ProcurementPage() {
 
   const statCards = [
     { label: 'Total Items',  value: stats.total,     icon: PackageSearch, color: 'text-civil-muted',  bg: 'bg-civil-surface' },
-    { label: 'Pending',      value: stats.pending,   icon: Clock,         color: 'text-yellow-400',   bg: 'bg-yellow-900/20' },
-    { label: 'Approved',     value: stats.approved,  icon: CheckCircle2,  color: 'text-blue-400',     bg: 'bg-blue-900/20' },
+    { label: 'Pending',      value: stats.pending,   icon: Clock,         color: 'text-amber-600',   bg: 'bg-amber-50' },
+    { label: 'Approved',     value: stats.approved,  icon: CheckCircle2,  color: 'text-blue-600',     bg: 'bg-blue-50' },
     { label: 'Ordered',      value: stats.ordered,   icon: ShoppingCart,  color: 'text-purple-400',   bg: 'bg-purple-900/20' },
-    { label: 'Delivered',    value: stats.delivered, icon: Truck,         color: 'text-green-400',    bg: 'bg-green-900/20' },
-    { label: 'Total Budget', value: `৳ ${(stats.totalBudget / 100000).toFixed(1)}L`, icon: DollarSign, color: 'text-civil-accent', bg: 'bg-blue-900/20' },
+    { label: 'Delivered',    value: stats.delivered, icon: Truck,         color: 'text-green-600',    bg: 'bg-green-50' },
+    { label: 'Total Budget', value: `৳ ${(stats.totalBudget / 100000).toFixed(1)}L`, icon: DollarSign, color: 'text-civil-accent', bg: 'bg-blue-50' },
   ]
 
   if (loading) {
@@ -135,7 +135,7 @@ export default function ProcurementPage() {
           {items.length > 0 && (
             <button
               onClick={() => setShowConfirm(true)}
-              className="btn-ghost flex items-center gap-1.5 text-red-400 border-red-900/30 hover:bg-red-900/10"
+              className="btn-ghost flex items-center gap-1.5 text-red-600 border-red-200 hover:bg-red-50"
             >
               <Trash2 className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Reset</span>
@@ -144,7 +144,7 @@ export default function ProcurementPage() {
           <button
             onClick={handleAutoGenerate}
             disabled={generating || activities.length === 0}
-            className="btn-ghost flex items-center gap-2 text-civil-accent border-civil-accent/30 hover:bg-civil-accent/10"
+            className="btn-ghost flex items-center gap-2 text-civil-accent border-civil-accent/30 hover:bg-civil-accent/8"
           >
             {generating
               ? <RefreshCw className="w-3.5 h-3.5 animate-spin" />
@@ -292,7 +292,7 @@ export default function ProcurementPage() {
 
       {/* Confirm reset */}
       {showConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30">
           <div className="bg-civil-card border border-civil-border rounded-2xl p-6 max-w-sm w-full">
             <h3 className="font-semibold text-civil-text mb-2">Reset Procurement?</h3>
             <p className="text-sm text-civil-muted mb-5">

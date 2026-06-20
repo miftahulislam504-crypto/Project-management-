@@ -23,7 +23,7 @@ import {
 } from 'lucide-react'
 import { clsx } from 'clsx'
 
-const COLORS = ['#22c55e', '#ef4444', '#f59e0b', '#38bdf8', '#a855f7']
+const COLORS = ['#22c55e', '#ef4444', '#f59e0b', '#1a56db', '#a855f7']
 
 export default function AnalyticsPage() {
   const { id: projectId }    = useParams<{ id: string }>()
@@ -100,7 +100,7 @@ export default function AnalyticsPage() {
 
   const taskKanbanData = [
     { name: 'Planned',     count: tasks.filter(t => t.status === 'planned').length,     fill: '#64748b' },
-    { name: 'Ready',       count: tasks.filter(t => t.status === 'ready').length,        fill: '#38bdf8' },
+    { name: 'Ready',       count: tasks.filter(t => t.status === 'ready').length,        fill: '#1a56db' },
     { name: 'In Progress', count: tasks.filter(t => t.status === 'in-progress').length,  fill: '#f59e0b' },
     { name: 'Review',      count: tasks.filter(t => t.status === 'review').length,       fill: '#a855f7' },
     { name: 'Completed',   count: tasks.filter(t => t.status === 'completed').length,    fill: '#22c55e' },
@@ -180,30 +180,30 @@ export default function AnalyticsPage() {
           {
             label: 'Overall Progress', value: `${progress.overall}%`,
             sub: `${progress.completed}/${progress.total} activities`,
-            icon: TrendingUp, color: 'text-civil-accent', bg: 'bg-blue-900/20',
+            icon: TrendingUp, color: 'text-civil-accent', bg: 'bg-blue-50',
           },
           {
             label: 'SPI',
             value: evm.SPI.toFixed(2),
             sub: evm.SPI >= 1 ? 'On/Ahead schedule' : 'Behind schedule',
             icon: evm.SPI >= 1 ? TrendingUp : TrendingDown,
-            color: evm.SPI >= 1 ? 'text-green-400' : 'text-red-400',
-            bg:    evm.SPI >= 1 ? 'bg-green-900/20' : 'bg-red-900/20',
+            color: evm.SPI >= 1 ? 'text-green-600' : 'text-red-600',
+            bg:    evm.SPI >= 1 ? 'bg-green-50' : 'bg-red-50',
           },
           {
             label: 'CPI',
             value: evm.CPI.toFixed(2),
             sub: evm.CPI >= 1 ? 'Under budget' : 'Over budget',
             icon: DollarSign,
-            color: evm.CPI >= 1 ? 'text-green-400' : 'text-red-400',
-            bg:    evm.CPI >= 1 ? 'bg-green-900/20' : 'bg-red-900/20',
+            color: evm.CPI >= 1 ? 'text-green-600' : 'text-red-600',
+            bg:    evm.CPI >= 1 ? 'bg-green-50' : 'bg-red-50',
           },
           {
             label: 'Open Issues', value: issueStats.open,
             sub: `${issueStats.critical} critical`,
             icon: AlertTriangle,
-            color: issueStats.critical > 0 ? 'text-red-400' : 'text-yellow-400',
-            bg:    issueStats.critical > 0 ? 'bg-red-900/20' : 'bg-yellow-900/20',
+            color: issueStats.critical > 0 ? 'text-red-600' : 'text-amber-600',
+            bg:    issueStats.critical > 0 ? 'bg-red-50' : 'bg-amber-50',
           },
         ].map(({ label, value, sub, icon: Icon, color, bg }) => (
           <div key={label} className="card">
@@ -226,13 +226,13 @@ export default function AnalyticsPage() {
           <div className="h-48">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={progressByPhase} margin={{ top: 5, right: 5, bottom: 20, left: -20 }} barCategoryGap="25%">
-                <CartesianGrid strokeDasharray="3 3" stroke="#2a2d3e" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
                 <XAxis dataKey="name" tick={{ fill: '#64748b', fontSize: 9 }} axisLine={false} tickLine={false} angle={-30} textAnchor="end" />
                 <YAxis tick={{ fill: '#64748b', fontSize: 10 }} axisLine={false} tickLine={false} unit="%" domain={[0, 100]} />
-                <Tooltip contentStyle={{ backgroundColor: '#1e2130', border: '1px solid #2a2d3e', borderRadius: 8, fontSize: 11 }}
-                  cursor={{ fill: 'rgba(255,255,255,0.03)' }} />
-                <Bar dataKey="target" name="Target"  fill="#2a2d3e" radius={[3,3,0,0]} />
-                <Bar dataKey="actual" name="Actual"  fill="#38bdf8" radius={[3,3,0,0]} />
+                <Tooltip contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 8, fontSize: 11 }}
+                  cursor={{ fill: 'rgba(0,0,0,0.04)' }} />
+                <Bar dataKey="target" name="Target"  fill="#dbeafe" radius={[3,3,0,0]} />
+                <Bar dataKey="actual" name="Actual"  fill="#1a56db" radius={[3,3,0,0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -244,10 +244,10 @@ export default function AnalyticsPage() {
           <div className="h-48">
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart data={radarData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
-                <PolarGrid stroke="#2a2d3e" />
+                <PolarGrid stroke="#e5e7eb" />
                 <PolarAngleAxis dataKey="metric" tick={{ fill: '#64748b', fontSize: 10 }} />
-                <Radar name="Health" dataKey="value" stroke="#38bdf8" fill="#38bdf8" fillOpacity={0.15} strokeWidth={2} />
-                <Tooltip contentStyle={{ backgroundColor: '#1e2130', border: '1px solid #2a2d3e', borderRadius: 8, fontSize: 11 }}
+                <Radar name="Health" dataKey="value" stroke="#1a56db" fill="#1a56db" fillOpacity={0.15} strokeWidth={2} />
+                <Tooltip contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 8, fontSize: 11 }}
                   formatter={(v: number) => [`${v}%`, 'Score']} />
               </RadarChart>
             </ResponsiveContainer>
@@ -264,10 +264,10 @@ export default function AnalyticsPage() {
           <div className="h-36">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={taskKanbanData} margin={{ top: 5, right: 5, bottom: 0, left: -25 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#2a2d3e" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
                 <XAxis dataKey="name" tick={{ fill: '#64748b', fontSize: 8 }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fill: '#64748b', fontSize: 10 }} axisLine={false} tickLine={false} allowDecimals={false} />
-                <Tooltip contentStyle={{ backgroundColor: '#1e2130', border: '1px solid #2a2d3e', borderRadius: 8, fontSize: 11 }} cursor={{ fill: 'rgba(255,255,255,0.03)' }} />
+                <Tooltip contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 8, fontSize: 11 }} cursor={{ fill: 'rgba(0,0,0,0.04)' }} />
                 <Bar dataKey="count" name="Tasks" radius={[3,3,0,0]}>
                   {taskKanbanData.map((d, i) => <Cell key={i} fill={d.fill} />)}
                 </Bar>
@@ -276,7 +276,7 @@ export default function AnalyticsPage() {
           </div>
           <div className="flex justify-between text-xs mt-2">
             <span className="text-civil-muted">Total: <span className="text-civil-text font-semibold">{taskStats.total}</span></span>
-            {taskStats.overdue > 0 && <span className="text-red-400 font-semibold">{taskStats.overdue} overdue</span>}
+            {taskStats.overdue > 0 && <span className="text-red-600 font-semibold">{taskStats.overdue} overdue</span>}
           </div>
         </div>
 
@@ -291,7 +291,7 @@ export default function AnalyticsPage() {
                     <Pie data={issueByType} cx="50%" cy="50%" outerRadius={50} dataKey="value" paddingAngle={3}>
                       {issueByType.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                     </Pie>
-                    <Tooltip contentStyle={{ backgroundColor: '#1e2130', border: '1px solid #2a2d3e', borderRadius: 8, fontSize: 11 }} />
+                    <Tooltip contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 8, fontSize: 11 }} />
                   </PieChart>
                 </ResponsiveContainer>
               </div>
@@ -314,9 +314,9 @@ export default function AnalyticsPage() {
           <h3 className="text-sm font-semibold text-civil-text mb-3">QA/QC Summary</h3>
           <div className="space-y-3">
             {[
-              { label: 'Pass',        value: qcStats.pass,                color: 'text-green-400',  bar: 'bg-green-400' },
-              { label: 'Fail',        value: qcStats.fail,                color: 'text-red-400',    bar: 'bg-red-400' },
-              { label: 'Observation', value: qcStats.total - qcStats.pass - qcStats.fail, color: 'text-yellow-400', bar: 'bg-yellow-400' },
+              { label: 'Pass',        value: qcStats.pass,                color: 'text-green-600',  bar: 'bg-green-400' },
+              { label: 'Fail',        value: qcStats.fail,                color: 'text-red-600',    bar: 'bg-red-400' },
+              { label: 'Observation', value: qcStats.total - qcStats.pass - qcStats.fail, color: 'text-amber-600', bar: 'bg-yellow-400' },
             ].map(({ label, value, color, bar }) => (
               <div key={label}>
                 <div className="flex justify-between text-xs mb-1">
@@ -343,8 +343,8 @@ export default function AnalyticsPage() {
         {[
           { label: 'BAC',  value: `৳ ${(evm.BAC / 100000).toFixed(1)}L`,  color: 'text-civil-accent' },
           { label: 'EV',   value: `৳ ${(evm.EV / 100000).toFixed(1)}L`,   color: 'text-purple-400' },
-          { label: 'AC',   value: `৳ ${(evm.AC / 100000).toFixed(1)}L`,   color: 'text-yellow-400' },
-          { label: 'EAC',  value: `৳ ${(evm.EAC / 100000).toFixed(1)}L`,  color: evm.EAC > evm.BAC ? 'text-red-400' : 'text-green-400' },
+          { label: 'AC',   value: `৳ ${(evm.AC / 100000).toFixed(1)}L`,   color: 'text-amber-600' },
+          { label: 'EAC',  value: `৳ ${(evm.EAC / 100000).toFixed(1)}L`,  color: evm.EAC > evm.BAC ? 'text-red-600' : 'text-green-600' },
         ].map(({ label, value, color }) => (
           <div key={label} className="card text-center">
             <p className={clsx('text-lg font-bold', color)}>{value}</p>

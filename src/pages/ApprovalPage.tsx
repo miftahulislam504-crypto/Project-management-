@@ -158,9 +158,9 @@ export default function ApprovalPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
         {[
           { label: 'Total',    value: stats.total,    color: 'text-civil-muted',  bg: 'bg-civil-surface' },
-          { label: 'Pending',  value: stats.pending,  color: 'text-yellow-400',   bg: 'bg-yellow-900/20' },
-          { label: 'Approved', value: stats.approved, color: 'text-green-400',    bg: 'bg-green-900/20' },
-          { label: 'Rejected', value: stats.rejected, color: 'text-red-400',      bg: 'bg-red-900/20' },
+          { label: 'Pending',  value: stats.pending,  color: 'text-amber-600',   bg: 'bg-amber-50' },
+          { label: 'Approved', value: stats.approved, color: 'text-green-600',    bg: 'bg-green-50' },
+          { label: 'Rejected', value: stats.rejected, color: 'text-red-600',      bg: 'bg-red-50' },
         ].map(({ label, value, color, bg }) => (
           <div key={label} className="card text-center">
             <p className={clsx('text-2xl font-bold', color)}>{value}</p>
@@ -212,9 +212,9 @@ export default function ApprovalPage() {
             return (
               <div key={approval.id} className={clsx(
                 'card border transition-colors',
-                approval.status === 'approved' && 'border-green-900/40',
-                approval.status === 'rejected' && 'border-red-900/40',
-                approval.status === 'pending'  && 'border-yellow-900/30',
+                approval.status === 'approved' && 'border-green-200',
+                approval.status === 'rejected' && 'border-red-200',
+                approval.status === 'pending'  && 'border-amber-200',
               )}>
                 {/* Card header */}
                 <div className="flex items-start justify-between gap-3 mb-3">
@@ -238,11 +238,11 @@ export default function ApprovalPage() {
                   </div>
                   <div className="flex gap-1 flex-shrink-0">
                     <button onClick={() => openModal(approval)}
-                      className="p-1.5 text-civil-muted hover:text-civil-accent hover:bg-civil-accent/10 rounded transition-colors">
+                      className="p-1.5 text-civil-muted hover:text-civil-accent hover:bg-civil-accent/8 rounded transition-colors">
                       <Save className="w-3.5 h-3.5" />
                     </button>
                     <button onClick={() => deleteApproval(approval.id)}
-                      className="p-1.5 text-civil-muted hover:text-red-400 hover:bg-red-900/10 rounded transition-colors">
+                      className="p-1.5 text-civil-muted hover:text-red-600 hover:bg-red-50 rounded transition-colors">
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
@@ -259,21 +259,21 @@ export default function ApprovalPage() {
                       <div key={step.level} className="flex items-center gap-1 flex-shrink-0">
                         <div className={clsx(
                           'rounded-lg px-2.5 py-2 border text-center min-w-[90px]',
-                          isDone     && 'bg-green-900/20 border-green-900/40',
-                          isActive   && 'bg-yellow-900/20 border-yellow-900/40',
-                          isRejected && 'bg-red-900/20 border-red-900/40',
+                          isDone     && 'bg-green-50 border-green-200',
+                          isActive   && 'bg-amber-50 border-amber-200',
+                          isRejected && 'bg-red-50 border-red-200',
                           isWaiting  && 'bg-civil-surface border-civil-border opacity-50',
                         )}>
                           <p className={clsx('text-[9px] font-semibold',
-                            isDone ? 'text-green-400' : isActive ? 'text-yellow-400' :
-                            isRejected ? 'text-red-400' : 'text-civil-muted'
+                            isDone ? 'text-green-600' : isActive ? 'text-amber-600' :
+                            isRejected ? 'text-red-600' : 'text-civil-muted'
                           )}>
                             L{step.level}: {step.role}
                           </p>
                           <div className="flex justify-center mt-1">
-                            {isDone     && <CheckCircle2 className="w-4 h-4 text-green-400" />}
-                            {isActive   && <Clock        className="w-4 h-4 text-yellow-400" />}
-                            {isRejected && <XCircle      className="w-4 h-4 text-red-400" />}
+                            {isDone     && <CheckCircle2 className="w-4 h-4 text-green-600" />}
+                            {isActive   && <Clock        className="w-4 h-4 text-amber-600" />}
+                            {isRejected && <XCircle      className="w-4 h-4 text-red-600" />}
                             {isWaiting  && <Clock        className="w-4 h-4 text-civil-muted" />}
                           </div>
                           {/* Action buttons for active step */}
@@ -312,7 +312,7 @@ export default function ApprovalPage() {
 
       {/* ── MODAL ── */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm">
           <div className="bg-civil-card border border-civil-border rounded-2xl w-full max-w-md flex flex-col max-h-[90vh]">
             <div className="flex items-center justify-between px-5 py-4 border-b border-civil-border flex-shrink-0">
               <h2 className="font-semibold text-civil-text">{editApproval ? 'Edit Request' : 'New Approval Request'}</h2>
@@ -369,7 +369,7 @@ export default function ApprovalPage() {
                       <div key={l.level} className={clsx(
                         'flex items-center gap-3 px-3 py-2 rounded-lg border text-xs transition-colors',
                         l.level <= aForm.maxLevel
-                          ? 'bg-civil-accent/10 border-civil-accent/30 text-civil-accent'
+                          ? 'bg-civil-accent/8 border-civil-accent/30 text-civil-accent'
                           : 'bg-civil-surface border-civil-border text-civil-muted'
                       )}>
                         <span className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold border border-current">

@@ -111,10 +111,10 @@ export default function ProgressPage() {
 
   const filterButtons: { key: FilterType; label: string; count: number; color: string }[] = [
     { key: 'all',         label: 'All',         count: leaves.length,   color: 'text-civil-muted' },
-    { key: 'in-progress', label: 'In Progress', count: stats.inProg,    color: 'text-blue-400' },
-    { key: 'delayed',     label: 'Delayed',     count: stats.delayed,   color: 'text-red-400' },
+    { key: 'in-progress', label: 'In Progress', count: stats.inProg,    color: 'text-blue-600' },
+    { key: 'delayed',     label: 'Delayed',     count: stats.delayed,   color: 'text-red-600' },
     { key: 'not-started', label: 'Not Started', count: stats.notStart,  color: 'text-civil-muted' },
-    { key: 'completed',   label: 'Completed',   count: stats.completed, color: 'text-green-400' },
+    { key: 'completed',   label: 'Completed',   count: stats.completed, color: 'text-green-600' },
   ]
 
   if (loading) {
@@ -158,9 +158,9 @@ export default function ProgressPage() {
         </div>
 
         {[
-          { label: 'Completed',   value: stats.completed, icon: CheckCircle2,  color: 'text-green-400',  bg: 'bg-green-900/20' },
-          { label: 'In Progress', value: stats.inProg,    icon: Clock,          color: 'text-blue-400',   bg: 'bg-blue-900/20' },
-          { label: 'Delayed',     value: stats.delayed,   icon: AlertTriangle,  color: 'text-red-400',    bg: 'bg-red-900/20' },
+          { label: 'Completed',   value: stats.completed, icon: CheckCircle2,  color: 'text-green-600',  bg: 'bg-green-50' },
+          { label: 'In Progress', value: stats.inProg,    icon: Clock,          color: 'text-blue-600',   bg: 'bg-blue-50' },
+          { label: 'Delayed',     value: stats.delayed,   icon: AlertTriangle,  color: 'text-red-600',    bg: 'bg-red-50' },
         ].map(({ label, value, icon: Icon, color, bg }) => (
           <div key={label} className="card">
             <div className={clsx('w-7 h-7 rounded-lg flex items-center justify-center mb-2', bg)}>
@@ -334,7 +334,7 @@ export default function ProgressPage() {
                         <td className="px-3 py-2">
                           <span className={clsx(
                             'font-semibold',
-                            change > 0 ? 'text-green-400' : change < 0 ? 'text-red-400' : 'text-civil-muted'
+                            change > 0 ? 'text-green-600' : change < 0 ? 'text-red-600' : 'text-civil-muted'
                           )}>
                             {change > 0 ? '+' : ''}{change}%
                           </span>
@@ -343,9 +343,9 @@ export default function ProgressPage() {
                           {u.issues !== 'none' && (
                             <span className={clsx(
                               'text-[10px] px-1.5 py-0.5 rounded-full capitalize',
-                              u.issues === 'critical' ? 'bg-red-900/30 text-red-400' :
+                              u.issues === 'critical' ? 'bg-red-50 text-red-600' :
                               u.issues === 'major'    ? 'bg-orange-900/30 text-orange-400' :
-                              'bg-yellow-900/30 text-yellow-400'
+                              'bg-amber-50 text-amber-600'
                             )}>
                               {u.issues}
                             </span>

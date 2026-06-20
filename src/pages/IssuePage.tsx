@@ -178,9 +178,9 @@ export default function IssuePage() {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-3">
             {[
-              { label: 'Open',        count: issueStats.open,   color: 'text-red-400',    bg: 'bg-red-900/20',    icon: AlertTriangle },
-              { label: 'In Progress', count: issueStats.inProg, color: 'text-yellow-400', bg: 'bg-yellow-900/20', icon: Clock },
-              { label: 'Closed',      count: issueStats.closed, color: 'text-green-400',  bg: 'bg-green-900/20',  icon: CheckCircle2 },
+              { label: 'Open',        count: issueStats.open,   color: 'text-red-600',    bg: 'bg-red-50',    icon: AlertTriangle },
+              { label: 'In Progress', count: issueStats.inProg, color: 'text-amber-600', bg: 'bg-amber-50', icon: Clock },
+              { label: 'Closed',      count: issueStats.closed, color: 'text-green-600',  bg: 'bg-green-50',  icon: CheckCircle2 },
             ].map(({ label, count, color, bg, icon: Icon }) => (
               <div key={label} className="card text-center">
                 <Icon className={clsx('w-5 h-5 mx-auto mb-1', color)} />
@@ -235,11 +235,11 @@ export default function IssuePage() {
                           <option value="closed">Closed</option>
                         </select>
                         <button onClick={() => openIssueModal(issue)}
-                          className="p-1.5 text-civil-muted hover:text-civil-accent hover:bg-civil-accent/10 rounded transition-colors">
+                          className="p-1.5 text-civil-muted hover:text-civil-accent hover:bg-civil-accent/8 rounded transition-colors">
                           <Save className="w-3.5 h-3.5" />
                         </button>
                         <button onClick={() => deleteIssue(issue.id)}
-                          className="p-1.5 text-civil-muted hover:text-red-400 hover:bg-red-900/10 rounded transition-colors">
+                          className="p-1.5 text-civil-muted hover:text-red-600 hover:bg-red-50 rounded transition-colors">
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
@@ -262,10 +262,10 @@ export default function IssuePage() {
               <div className="h-36">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={riskChartData} margin={{ top: 5, right: 10, bottom: 0, left: -20 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#2a2d3e" vertical={false} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
                     <XAxis dataKey="name" tick={{ fill: '#64748b', fontSize: 10 }} axisLine={false} tickLine={false} />
                     <YAxis tick={{ fill: '#64748b', fontSize: 10 }} axisLine={false} tickLine={false} allowDecimals={false} />
-                    <Tooltip contentStyle={{ backgroundColor: '#1e2130', border: '1px solid #2a2d3e', borderRadius: 8, fontSize: 11 }} cursor={{ fill: 'rgba(255,255,255,0.03)' }} />
+                    <Tooltip contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 8, fontSize: 11 }} cursor={{ fill: 'rgba(0,0,0,0.04)' }} />
                     <Bar dataKey="count" name="Risks" radius={[4,4,0,0]}>
                       {riskChartData.map((d, i) => <Cell key={i} fill={d.fill} />)}
                     </Bar>
@@ -322,7 +322,7 @@ export default function IssuePage() {
                               <button onClick={() => openRiskModal(risk)} className="p-1 text-civil-muted hover:text-civil-accent rounded transition-colors">
                                 <Save className="w-3.5 h-3.5" />
                               </button>
-                              <button onClick={() => deleteRisk(risk.id)} className="p-1 text-civil-muted hover:text-red-400 rounded transition-colors">
+                              <button onClick={() => deleteRisk(risk.id)} className="p-1 text-civil-muted hover:text-red-600 rounded transition-colors">
                                 <Trash2 className="w-3.5 h-3.5" />
                               </button>
                             </div>
@@ -340,7 +340,7 @@ export default function IssuePage() {
 
       {/* ── ISSUE MODAL ── */}
       {showIssueModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm">
           <div className="bg-civil-card border border-civil-border rounded-2xl w-full max-w-md flex flex-col max-h-[90vh]">
             <div className="flex items-center justify-between px-5 py-4 border-b border-civil-border flex-shrink-0">
               <h2 className="font-semibold text-civil-text">{editIssue ? 'Edit Issue' : 'New Issue'}</h2>
@@ -413,7 +413,7 @@ export default function IssuePage() {
 
       {/* ── RISK MODAL ── */}
       {showRiskModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm">
           <div className="bg-civil-card border border-civil-border rounded-2xl w-full max-w-md flex flex-col max-h-[90vh]">
             <div className="flex items-center justify-between px-5 py-4 border-b border-civil-border flex-shrink-0">
               <h2 className="font-semibold text-civil-text">{editRisk ? 'Edit Risk' : 'New Risk'}</h2>

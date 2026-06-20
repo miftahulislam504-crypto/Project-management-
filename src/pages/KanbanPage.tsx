@@ -275,11 +275,11 @@ export default function KanbanPage() {
             Total: <span className="text-civil-text font-semibold">{total}</span>
           </span>
           <span className="text-civil-muted">
-            Completed: <span className="text-green-400 font-semibold">{completed}</span>
+            Completed: <span className="text-green-600 font-semibold">{completed}</span>
           </span>
           {overdue > 0 && (
             <span className="text-civil-muted">
-              Overdue: <span className="text-red-400 font-semibold">{overdue}</span>
+              Overdue: <span className="text-red-600 font-semibold">{overdue}</span>
             </span>
           )}
           {total > 0 && (

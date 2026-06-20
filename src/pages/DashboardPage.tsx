@@ -75,7 +75,7 @@ export default function DashboardPage() {
   if (error) {
     return (
       <div className="p-6 flex flex-col items-center justify-center gap-4 text-center">
-        <AlertTriangle className="w-10 h-10 text-red-400" />
+        <AlertTriangle className="w-10 h-10 text-red-600" />
         <div>
           <p className="text-civil-text font-medium mb-1">Failed to load project</p>
           <p className="text-xs text-civil-muted max-w-sm">{error}</p>
@@ -94,8 +94,8 @@ export default function DashboardPage() {
             <RefreshCw className="w-3.5 h-3.5" /> Retry
           </button>
         </div>
-        <div className="bg-red-900/10 border border-red-900/30 rounded-lg p-3 text-left max-w-sm">
-          <p className="text-xs text-red-400 font-medium mb-1">সমাধান:</p>
+        <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-left max-w-sm">
+          <p className="text-xs text-red-600 font-medium mb-1">সমাধান:</p>
           <p className="text-xs text-civil-muted">
             Firebase Console → Firestore → Rules-এ নিচের rules সেট করো:
           </p>
@@ -118,7 +118,7 @@ service cloud.firestore {
   if (!project) {
     return (
       <div className="p-6 flex flex-col items-center justify-center gap-3 text-center">
-        <AlertTriangle className="w-10 h-10 text-yellow-400" />
+        <AlertTriangle className="w-10 h-10 text-amber-600" />
         <p className="text-civil-text font-medium">Project not found</p>
         <p className="text-xs text-civil-muted">This project may have been deleted.</p>
         <button
@@ -143,32 +143,32 @@ service cloud.firestore {
       label: 'Planned Progress',
       value: `${project.plannedProgress}%`,
       icon:  TrendingUp,
-      color: 'text-blue-400',
-      bg:    'bg-blue-900/20',
+      color: 'text-blue-600',
+      bg:    'bg-blue-50',
       sub:   'Schedule Baseline',
     },
     {
       label: 'Actual Progress',
       value: `${project.actualProgress}%`,
       icon:  Activity,
-      color: 'text-green-400',
-      bg:    'bg-green-900/20',
+      color: 'text-green-600',
+      bg:    'bg-green-50',
       sub:   project.actualProgress >= project.plannedProgress ? '✓ On Schedule' : '⚠ Behind Schedule',
     },
     {
       label: 'Budget Used',
       value: `${budgetPct}%`,
       icon:  DollarSign,
-      color: 'text-yellow-400',
-      bg:    'bg-yellow-900/20',
+      color: 'text-amber-600',
+      bg:    'bg-amber-50',
       sub:   `৳ ${(project.budgetUsed / 100000).toFixed(1)}L of ৳ ${(project.contractValue / 100000).toFixed(1)}L`,
     },
     {
       label: 'SPI',
       value: spi,
       icon:  parseFloat(spi) >= 1 ? CheckCircle2 : AlertTriangle,
-      color: parseFloat(spi) >= 1 ? 'text-green-400' : 'text-red-400',
-      bg:    parseFloat(spi) >= 1 ? 'bg-green-900/20' : 'bg-red-900/20',
+      color: parseFloat(spi) >= 1 ? 'text-green-600' : 'text-red-600',
+      bg:    parseFloat(spi) >= 1 ? 'bg-green-50' : 'bg-red-50',
       sub:   parseFloat(spi) >= 1 ? 'Ahead of Schedule' : 'Behind Schedule',
     },
     {
@@ -208,10 +208,10 @@ service cloud.firestore {
         <span className={`
           text-xs px-3 py-1 rounded-full font-medium capitalize border
           ${project.status === 'active'
-            ? 'bg-green-900/20 text-green-400 border-green-900/40'
+            ? 'bg-green-50 text-green-600 border-green-200'
             : project.status === 'planning'
-            ? 'bg-blue-900/20 text-blue-400 border-blue-900/40'
-            : 'bg-yellow-900/20 text-yellow-400 border-yellow-900/40'}
+            ? 'bg-blue-50 text-blue-600 border-blue-200'
+            : 'bg-amber-50 text-amber-600 border-amber-200'}
         `}>
           {project.status}
         </span>
@@ -261,23 +261,23 @@ service cloud.firestore {
             <AreaChart data={mockProgressData} margin={{ top: 5, right: 5, bottom: 0, left: -20 }}>
               <defs>
                 <linearGradient id="plannedGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#38bdf8" stopOpacity={0.15} />
-                  <stop offset="95%" stopColor="#38bdf8" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#1a56db" stopOpacity={0.15} />
+                  <stop offset="95%" stopColor="#1a56db" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="actualGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#22c55e" stopOpacity={0.15} />
-                  <stop offset="95%" stopColor="#22c55e" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#059669" stopOpacity={0.15} />
+                  <stop offset="95%" stopColor="#059669" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#2a2d3e" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
               <XAxis dataKey="week" tick={{ fill: '#64748b', fontSize: 11 }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fill: '#64748b', fontSize: 11 }} axisLine={false} tickLine={false} unit="%" />
               <Tooltip
-                contentStyle={{ backgroundColor: '#1e2130', border: '1px solid #2a2d3e', borderRadius: 8, fontSize: 12 }}
-                labelStyle={{ color: '#e2e8f0' }}
+                contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 8, fontSize: 12 }}
+                labelStyle={{ color: '#111827' }}
               />
-              <Area type="monotone" dataKey="planned" stroke="#38bdf8" strokeWidth={2} fill="url(#plannedGrad)" name="Planned" />
-              <Area type="monotone" dataKey="actual"  stroke="#22c55e" strokeWidth={2} fill="url(#actualGrad)"  name="Actual" />
+              <Area type="monotone" dataKey="planned" stroke="#1a56db" strokeWidth={2} fill="url(#plannedGrad)" name="Planned" />
+              <Area type="monotone" dataKey="actual"  stroke="#059669" strokeWidth={2} fill="url(#actualGrad)"  name="Actual" />
             </AreaChart>
           </ResponsiveContainer>
         </div>

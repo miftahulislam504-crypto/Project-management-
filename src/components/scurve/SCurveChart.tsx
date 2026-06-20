@@ -28,9 +28,9 @@ export default function SCurveChart({ data }: Props) {
           name: 'Planned Progress',
           type: 'scatter',
           mode: 'lines',
-          line: { color: '#38bdf8', width: 2.5, shape: 'spline' },
+          line: { color: '#1a56db', width: 2.5, shape: 'spline' },
           fill: 'tozeroy',
-          fillcolor: 'rgba(56,189,248,0.06)',
+          fillcolor: 'rgba(26,86,219,0.06)',
         },
         // Actual S-curve
         {
@@ -39,8 +39,8 @@ export default function SCurveChart({ data }: Props) {
           name: 'Actual Progress',
           type: 'scatter',
           mode: 'lines+markers',
-          line: { color: '#22c55e', width: 2.5, shape: 'spline' },
-          marker: { size: 5, color: '#22c55e' },
+          line: { color: '#059669', width: 2.5, shape: 'spline' },
+          marker: { size: 5, color: '#059669' },
           connectgaps: false,
         },
         // Forecast line
@@ -57,27 +57,27 @@ export default function SCurveChart({ data }: Props) {
 
       const layout = {
         paper_bgcolor: 'transparent',
-        plot_bgcolor:  '#1a1d27',
+        plot_bgcolor:  '#ffffff',
         font:          { family: 'Inter, sans-serif', color: '#64748b', size: 11 },
         margin:        { t: 10, r: 20, b: 40, l: 50 },
         xaxis: {
-          gridcolor:    '#2a2d3e',
-          linecolor:    '#2a2d3e',
-          tickcolor:    '#2a2d3e',
+          gridcolor:    '#e5e7eb',
+          linecolor:    '#e5e7eb',
+          tickcolor:    '#e5e7eb',
           title:        { text: 'Week', font: { size: 11 } },
           showgrid:     true,
         },
         yaxis: {
-          gridcolor:    '#2a2d3e',
-          linecolor:    '#2a2d3e',
+          gridcolor:    '#e5e7eb',
+          linecolor:    '#e5e7eb',
           title:        { text: 'Cumulative Progress (%)', font: { size: 11 } },
           range:        [0, 105],
           showgrid:     true,
           ticksuffix:   '%',
         },
         legend: {
-          bgcolor:      'rgba(30,33,48,0.8)',
-          bordercolor:  '#2a2d3e',
+          bgcolor:      'rgba(255,255,255,0.95)',
+          bordercolor:  '#e5e7eb',
           borderwidth:  1,
           font:         { size: 11 },
           orientation:  'h',
@@ -105,9 +105,9 @@ export default function SCurveChart({ data }: Props) {
           },
         ],
         hoverlabel: {
-          bgcolor:     '#1e2130',
-          bordercolor: '#2a2d3e',
-          font:        { family: 'Inter', size: 11, color: '#e2e8f0' },
+          bgcolor:     '#ffffff',
+          bordercolor: '#e5e7eb',
+          font:        { family: 'Inter', size: 11, color: '#111827' },
         },
       }
 

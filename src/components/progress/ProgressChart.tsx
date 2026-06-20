@@ -27,7 +27,7 @@ export function ProgressComparisonChart({ data }: BarProps) {
           barCategoryGap="25%"
           barGap={2}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#2a2d3e" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
           <XAxis
             dataKey="name"
             tick={{ fill: '#64748b', fontSize: 9 }}
@@ -43,20 +43,20 @@ export function ProgressComparisonChart({ data }: BarProps) {
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: '#1e2130',
-              border: '1px solid #2a2d3e',
+              backgroundColor: '#ffffff',
+              border: '1px solid #e5e7eb',
               borderRadius: 8,
               fontSize: 11,
             }}
-            labelStyle={{ color: '#e2e8f0' }}
-            cursor={{ fill: 'rgba(255,255,255,0.03)' }}
+            labelStyle={{ color: '#111827' }}
+            cursor={{ fill: 'rgba(0,0,0,0.04)' }}
           />
           <Legend
             wrapperStyle={{ fontSize: 11 }}
             formatter={v => <span style={{ color: '#94a3b8' }}>{v}</span>}
           />
-          <Bar dataKey="planned" name="Planned" fill="#2a2d3e" radius={[3,3,0,0]} />
-          <Bar dataKey="actual"  name="Actual"  fill="#38bdf8" radius={[3,3,0,0]} />
+          <Bar dataKey="planned" name="Planned" fill="#dbeafe" radius={[3,3,0,0]} />
+          <Bar dataKey="actual"  name="Actual"  fill="#1a56db" radius={[3,3,0,0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -83,7 +83,7 @@ export function DailyTrendChart({ data }: TrendProps) {
           data={data}
           margin={{ top: 5, right: 10, bottom: 0, left: -20 }}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#2a2d3e" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
           <XAxis
             dataKey="date"
             tick={{ fill: '#64748b', fontSize: 9 }}
@@ -98,18 +98,18 @@ export function DailyTrendChart({ data }: TrendProps) {
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: '#1e2130',
-              border: '1px solid #2a2d3e',
+              backgroundColor: '#ffffff',
+              border: '1px solid #e5e7eb',
               borderRadius: 8,
               fontSize: 11,
             }}
-            labelStyle={{ color: '#e2e8f0' }}
+            labelStyle={{ color: '#111827' }}
           />
           <Line
             type="monotone"
             dataKey="count"
             name="Updates/day"
-            stroke="#22c55e"
+            stroke="#059669"
             strokeWidth={2}
             dot={{ fill: '#22c55e', r: 3 }}
             activeDot={{ r: 5 }}
